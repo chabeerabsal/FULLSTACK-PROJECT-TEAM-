@@ -1,14 +1,33 @@
 import { Routes } from '@angular/router';
-import {Dashboard} from './components/dashboard/dashboard';
-import {Invoices} from './components/invoices/invoices';
-import {Expenses} from './components/expenses/expenses';
-import {Reports} from './components/reports/reports';
- 
+import { DashboardComponent } from './components/dashboard/dashboard';
+import { InvoicesComponent } from './components/invoices/invoices';
+import { ExpensesComponent } from './components/expenses/expenses';
+import { ReportsComponent } from './components/reports/reports';
+
 export const routes: Routes = [
-    {path:'',redirectTo:'/dashboard', pathMatch:'full'},
-    {path:'dashboard',component:Dashboard},
-    {path:'invoices',component:Invoices},
-    {path:'expenses',component:Expenses},
-    {path:'reports',component:Reports}
-    
+  { 
+    path: '', 
+    redirectTo: 'dashboard', 
+    pathMatch: 'full' 
+  },
+  { 
+    path: 'dashboard', 
+    component: DashboardComponent 
+  },
+  { 
+    path: 'invoices', 
+    component: InvoicesComponent 
+  },
+  { 
+    path: 'expenses', 
+    component: ExpensesComponent 
+  },
+  { 
+    path: 'reports', 
+    component: ReportsComponent 
+  },
+  { 
+    path: '**', 
+    redirectTo: 'dashboard' 
+  }
 ];

@@ -1,1 +1,104 @@
-<p>dashboard works!</p>
+<div class="dashboard-container">
+  
+  <!-- Loading State -->
+  <div *ngIf="isLoading" class="loading-container">
+    <div class="spinner"></div>
+    <p>Loading dashboard...</p>
+  </div>
+
+  <!-- Error State -->
+  <div *ngIf="error && !isLoading" class="error-container">
+    <div class="alert alert-danger">
+      <p>{{ error }}</p>
+      <button (click)="loadDashboardData()" class="btn btn-primary">Retry</button>
+    </div>
+  </div>
+
+  <!-- Dashboard Content -->
+  <div *ngIf="!isLoading && !error">
+    
+    <!-- Page Header -->
+    <div class="page-header">
+      <h1>Dashboard</h1>
+    </div>
+
+    <!-- Summary Cards -->
+    <div class="stats-grid">
+      
+      <!-- Total Income Card -->
+      <div class="stat-card income-card">
+        <p class="card-label">Total Income</p>
+        <p class="card-amount">{{ formatCurrency(totalIncome) }}</p>
+        <span class="card-sublabel">This Month</span>
+      </div>
+
+      <!-- Total Expenses Card -->
+      <div class="stat-card expense-card">
+        <p class="card-label">Total Expenses</p>
+        <p class="card-amount">{{ formatCurrency(totalExpenses) }}</p>
+        <span class="card-sublabel">This Month</span>
+      </div>
+
+      <!-- Net Profit Card -->
+      <div class="stat-card profit-card">
+        <p class="card-label">Net Profit</p>
+        <p class="card-amount">{{ formatCurrency(netProfit) }}</p>
+        <span class="card-sublabel">This Month</span>
+      </div>
+
+    </div>
+
+    <!-- Recent Data Section -->
+    <div class="recent-section">
+      
+      <!-- Recent Invoices -->
+      <div class="data-card">
+        <div class="card-header">
+          <h2>Recent Invoices</h2>
+        </div>
+
+        <div class="card-content">
+          <div *ngIf="recentInvoices.length === 0" class="empty-state">
+            <p>No invoices yet</p>
+          </div>
+
+          <div *ngIf="recentInvoices.length > 0" class="list-group">
+            <div *ngFor="let invoice of recentInvoices" class="list-group-item d-flex justify-content-between align-items-center">
+              <div>
+                <p class="mb-1 fw-bold">{{ invoice.clientName }}</p>
+                <small class="text-muted">{{ invoice.date }}</small>
+              </div>
+              <span class="badge bg-success">{{ formatCurrency(invoice.amount) }}</span>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Recent Expenses -->
+      <div class="data-card">
+        <div class="card-header">
+          <h2>Recent Expenses</h2>
+        </div>
+
+        <div class="card-content">
+          <div *ngIf="recentExpenses.length === 0" class="empty-state">
+            <p>No expenses yet</p>
+          </div>
+
+          <div *ngIf="recentExpenses.length > 0" class="list-group">
+            <div *ngFor="let expense of recentExpenses" class="list-group-item d-flex justify-content-between align-items-center">
+              <div>
+                <p class="mb-1 fw-bold">{{ expense.category }}</p>
+                <small class="text-muted">{{ expense.date }}</small>
+              </div>
+              <span class="badge bg-danger">{{ formatCurrency(expense.amount) }}</span>
+            </div>
+          </div>
+        </div>
+      </div>
+
+    </div>
+
+  </div>
+
+</div>
