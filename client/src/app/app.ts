@@ -1,176 +1,19 @@
-import { Component, signal } from '@angular/core';
-import { RouterLink, RouterOutlet } from '@angular/router';
-import { Dashboard } from './components/dashboard/dashboard';
+import { Component } from '@angular/core';
+import { RouterOutlet, RouterLink, RouterLinkActive } from '@angular/router';
+import { CommonModule } from '@angular/common';
 
 @Component({
   selector: 'app-root',
-  standalone:true,
-  imports: [RouterOutlet,RouterLink],
-  template: `
-  <nav>
-  <a routerLink="/dashboard">Dashboard</a>|
- <a routerLink="/invoices">Inovices</a>|
-  <a routerLink="/expenses">Expenses</a>|
-  <a routerLink="/reports">Reports</a>
-  </nav>
-  <router-outlet></router-outlet>
-  `,
-   
- 
+  standalone: true,
+  imports: [
+    CommonModule,
+    RouterOutlet,
+    RouterLink,
+    RouterLinkActive
+  ],
+  templateUrl: './app.html',
+  styleUrls: ['./app.css']
 })
-export class App {
- 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-   
-
-
+export class AppComponent {
+  title = 'Accounting App';
 }

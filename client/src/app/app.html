@@ -1,1 +1,45 @@
-<router-outlet></router-outlet>
+<div class="app-container">
+  
+  <!-- Header -->
+  <header class="app-header">
+    <div class="header-content">
+      <div class="logo">
+        <span class="logo-icon">💰</span>
+        <h1>SimpleBooks</h1>
+      </div>
+    </div>
+  </header>
+
+  <!-- Main Layout -->
+  <div class="main-layout">
+    
+    <!-- Sidebar -->
+    <aside class="sidebar">
+      <nav class="nav-menu">
+        <a routerLink="/dashboard" routerLinkActive="active" class="nav-item">
+          <span class="nav-icon">📊</span>
+          <span class="nav-label">Dashboard</span>
+        </a>
+        <a routerLink="/invoices" routerLinkActive="active" class="nav-item">
+          <span class="nav-icon">📄</span>
+          <span class="nav-label">Invoices</span>
+        </a>
+        <a routerLink="/expenses" routerLinkActive="active" class="nav-item">
+          <span class="nav-icon">💸</span>
+          <span class="nav-label">Expenses</span>
+        </a>
+        <a routerLink="/reports" routerLinkActive="active" class="nav-item">
+          <span class="nav-icon">📈</span>
+          <span class="nav-label">Reports</span>
+        </a>
+      </nav>
+    </aside>
+
+    <!-- Main Content -->
+    <main class="main-content">
+      <router-outlet></router-outlet>
+    </main>
+
+  </div>
+
+</div>

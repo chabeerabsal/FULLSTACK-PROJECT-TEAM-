@@ -1,1 +1,136 @@
-<p>expenses works!</p>
+<div class="expenses-container">
+  
+  <!-- Page Header -->
+  <div class="page-header d-flex justify-content-between align-items-center mb-4">
+    <h1>Expenses</h1>
+    <button (click)="openForm()" class="btn btn-danger">
+      + Add Expense
+    </button>
+  </div>
+
+  <!-- Loading State -->
+  <div *ngIf="isLoading" class="loading-container">
+    <div class="spinner"></div>
+    <p>Loading expenses...</p>
+  </div>
+
+  <!-- Error State -->
+  <div *ngIf="error && !isLoading" class="alert alert-danger">
+    {{ error }}
+    <button (click)="loadExpenses()" class="btn btn-sm btn-primary ms-3">Retry</button>
+  </div>
+
+  <!-- Expenses Table -->
+  <div *ngIf="!isLoading && !error" class="card">
+    <div class="card-body">
+      
+      <div *ngIf="expenses.length === 0" class="empty-state text-center py-5">
+        <p class="text-muted">No expenses yet. Add your first expense!</p>
+      </div>
+
+      <div *ngIf="expenses.length > 0" class="table-responsive">
+        <table class="table table-hover">
+          <thead>
+            <tr>
+              <th>Category</th>
+              <th>Date</th>
+              <th>Amount</th>
+              <th>Description</th>
+              <th>Actions</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr *ngFor="let expense of expenses">
+              <td class="fw-bold">{{ expense.category }}</td>
+              <td>{{ expense.date }}</td>
+              <td class="fw-bold text-danger">{{ formatCurrency(expense.amount) }}</td>
+              <td>{{ expense.description }}</td>
+              <td>
+                <button (click)="editExpense(expense)" class="btn btn-sm btn-outline-primary me-2">
+                  Edit
+                </button>
+                <button (click)="deleteExpense(expense.id!)" class="btn btn-sm btn-outline-danger">
+                  Delete
+                </button>
+              </td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+
+    </div>
+  </div>
+
+  <!-- Modal Form -->
+  <div *ngIf="showForm" class="modal-overlay" (click)="closeForm()">
+    <div class="modal-content" (click)="$event.stopPropagation()">
+      <div class="modal-header">
+        <h5>{{ isEditMode ? 'Edit Expense' : 'Add Expense' }}</h5>
+        <button (click)="closeForm()" class="btn-close"></button>
+      </div>
+      
+      <div class="modal-body">
+        <form (ngSubmit)="saveExpense()">
+          
+          <div class="mb-3">
+            <label class="form-label">Category</label>
+            <select 
+              [(ngModel)]="expenseForm.category" 
+              name="category"
+              class="form-select" 
+              required
+            >
+              <option value="">Select Category</option>
+              <option *ngFor="let cat of categories" [value]="cat">{{ cat }}</option>
+            </select>
+          </div>
+
+          <div class="mb-3">
+            <label class="form-label">Amount (₹)</label>
+            <input 
+              type="number" 
+              [(ngModel)]="expenseForm.amount" 
+              name="amount"
+              class="form-control" 
+              required
+              min="0"
+            />
+          </div>
+
+          <div class="mb-3">
+            <label class="form-label">Date</label>
+            <input 
+              type="date" 
+              [(ngModel)]="expenseForm.date" 
+              name="date"
+              class="form-control" 
+              required
+            />
+          </div>
+
+          <div class="mb-3">
+            <label class="form-label">Description</label>
+            <textarea 
+              [(ngModel)]="expenseForm.description" 
+              name="description"
+              class="form-control" 
+              rows="3"
+              required
+            ></textarea>
+          </div>
+
+          <div class="d-flex gap-2">
+            <button type="submit" class="btn btn-danger flex-fill">
+              {{ isEditMode ? 'Update' : 'Save' }}
+            </button>
+            <button type="button" (click)="closeForm()" class="btn btn-secondary flex-fill">
+              Cancel
+            </button>
+          </div>
+
+        </form>
+      </div>
+    </div>
+  </div>
+
+</div>

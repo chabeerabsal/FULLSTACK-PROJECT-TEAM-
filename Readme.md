@@ -1,6 +1,7 @@
 ACCOUNTING FULLSTACK PROJECT
 FRONTEND-ANGULAR20
 BACKEND-JAVA
+
  Task link:https://docs.google.com/spreadsheets/d/1Mp0HDydZJhGlqIQrvWoEXALfPhcLlRJDFs39SLN-HnE/edit?usp=sharing
 
 
