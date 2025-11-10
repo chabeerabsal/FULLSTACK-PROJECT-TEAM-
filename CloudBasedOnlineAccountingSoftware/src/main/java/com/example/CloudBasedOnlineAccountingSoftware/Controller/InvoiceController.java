@@ -18,6 +18,7 @@ public class InvoiceController {
     @GetMapping
     public List<Invoice> getAllInvoices() {
         return invoiceService.getAllInvoices();
+
     }
 
     @GetMapping("/{id}")
