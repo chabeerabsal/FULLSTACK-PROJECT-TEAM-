@@ -51,6 +51,7 @@ public class InvoiceController {
     @GetMapping("/search")
     public List<Invoice> searchByClientName(@RequestParam String clientName) {
         return invoiceService.searchInvoicesByClientName(clientName);
+
     }
 }
 
